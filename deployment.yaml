@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app-deployment
+  namespace: app
   labels:
     app: app
 spec:
@@ -20,8 +21,8 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: API_KEY
+        - name: DATABASE_PASSWORD // container içinde oluşacak variable ismi
           valueFrom:
             secretKeyRef:
-              name: api-key-secret
-              key: api-key
+              name: secrets // ESO nun oluşturduğu secret in ismi
+              key: DB_PASSWORD // secret içindeki referans key in adı
